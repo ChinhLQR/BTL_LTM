@@ -44,8 +44,8 @@ GtkWidget       *label_notice;
 
 GtkWidget       *box_tree;
 GtkWidget       *list;
-const char *arrayOnline[2];
-int arrayOnlineCount=0;
+const char *arrayOnline[20];
+int arrayOnlineCount = 0
 
 GtkTreeSelection *selection;
 
@@ -113,7 +113,7 @@ void remove_item(GtkWidget *widget, const gchar *str) {
   }
 }
 
-void remove_all(GtkWidget *list) {
+void remove_all(GtkWidget *widget) {
     
   GtkListStore *store;
   GtkTreeModel *model;
@@ -122,9 +122,9 @@ void remove_all(GtkWidget *list) {
   store = GTK_LIST_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(list)));
   model = gtk_tree_view_get_model(GTK_TREE_VIEW(list));
 
-  //if (gtk_tree_model_get_iter_first(model, &iter) == FALSE) {
-  //    return;
- // }
+  if (gtk_tree_model_get_iter_first(model, &iter) == FALSE) {
+      return;
+  }
   
   gtk_list_store_clear(store);
 }
@@ -307,12 +307,11 @@ void signio_handler(int signo){
             p = strtok(NULL,"|");
             char *status = p;
             if(strcmp(status,"1")==0)
-            
             {
-                add_to_list(list,friend_oo);
+            add_to_list(list,friend_oo);
                 arrayOnline[arrayOnlineCount] = friend_oo;
                 arrayOnlineCount++;
-             }
+            }
             
 
             gtk_widget_show_all(window_chat);
@@ -327,19 +326,7 @@ void signio_handler(int signo){
             char *friend_oo = p;
             add_to_list(list,friend_oo);
             arrayOnline[arrayOnlineCount] = friend_oo;
-            arrayOnlineCount+=1;
-
-
-
-            //testttttttttttttttttttttttttttt
-            for(int i=0;i<arrayOnlineCount;i++)
-            {   printf("dangnhap 204\n");
-                printf("%d / %s \n",i,arrayOnline[i]);
-            }
-
-
-
-
+            arrayOnlineCount++;
             gtk_widget_show_all(window_chat);
         }
         
@@ -368,25 +355,13 @@ void signio_handler(int signo){
             for(int i=0;i<arrayOnlineCount;i++)
             {
                
-                if(strcmp(friend_oo,arrayOnline[i])==0)
+                if(strcmp(friend_oo,gtk_label_get_text(arrayOnline[i]))==0)
                 { 
-                    strcpy(arrayOnline[i],arrayOnline[arrayOnlineCount-1]);
+                    arrayOnline[i] = arrayOnline[arrayOnlineCount-1];
                     arrayOnline[arrayOnlineCount-1]=NULL;
                     arrayOnlineCount--;
                 }
             }
-
-
-            //testttttttttttttttttttttttttttt
-            for(int i=0;i<arrayOnlineCount;i++)
-            {   printf("dangxuat\n");
-                printf("%d / %s \n",i,arrayOnline[i]);
-            }
-
-
-
-
-            remove_all(list);
             for(int i=0;i<arrayOnlineCount;i++)
             {
             add_to_list(list,arrayOnline[i]);
@@ -560,11 +535,7 @@ int main(int argc, char *argv[])
       gtk_box_pack_start(GTK_BOX(box_tree), label, FALSE, FALSE, 5);
     
       init_list(list);
-      add_to_list(list, "Aliens");
-      add_to_list(list, "Leon");
-      add_to_list(list, "The Verdict");
-      add_to_list(list, "North Face");
-      add_to_list(list, "Der Untergang");
+      add_to_list(list,"loz");
 
 
 

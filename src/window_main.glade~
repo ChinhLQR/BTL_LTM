@@ -197,7 +197,6 @@
               <object class="GtkTreeView" id="treeview1">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="search_column">1</property>
                 <child internal-child="selection">
                   <object class="GtkTreeSelection" id="treeview-selection1"/>
                 </child>
@@ -222,6 +221,7 @@
     <property name="can_focus">False</property>
     <property name="default_width">300</property>
     <property name="default_height">300</property>
+    <signal name="destroy" handler="on_Window_Chat_Mini_destroy" object="Label_Chat_Name" swapped="no"/>
     <child>
       <object class="GtkBox" id="box11">
         <property name="visible">True</property>
@@ -233,11 +233,38 @@
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkLabel" id="Label_Chat_Name">
+              <object class="GtkBox" id="box16">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Name</property>
-                <property name="angle">0.029999999999999999</property>
+                <child>
+                  <object class="GtkLabel" id="Label_Chat_Name">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Name</property>
+                    <property name="angle">0.029999999999999999</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="Btn_close_chat">
+                    <property name="label" translatable="yes">X</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="xalign">0.4699999988079071</property>
+                    <property name="yalign">0.56999999284744263</property>
+                    <signal name="clicked" handler="on_Btn_close_chat_clicked" object="Label_Chat_Name" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -595,4 +622,5 @@
     </child>
   </object>
   <object class="GtkListStore" id="liststore1"/>
+  <object class="GtkListStore" id="liststore2"/>
 </interface>
